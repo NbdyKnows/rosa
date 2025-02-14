@@ -24,31 +24,10 @@ const nextConfig = {
   },
 }
 
-mergeConfig(nextConfig, userConfig)
-
-function mergeConfig(baseConfig, userConfig) {
-  if (!userConfig) {
-    return
-  }
-  for (const key in userConfig) {
-    if (Array.isArray(baseConfig[key]) && Array.isArray(userConfig[key])) {
-      // Sobrescribe arrays por completo
-      baseConfig[key] = userConfig[key]
-    } else if (
-      typeof baseConfig[key] === 'object' &&
-      baseConfig[key] !== null &&
-      typeof userConfig[key] === 'object' &&
-      userConfig[key] !== null &&
-      !Array.isArray(baseConfig[key])
-    ) {
-      baseConfig[key] = {
-        ...baseConfig[key],
-        ...userConfig[key],
-      }
-    } else {
-      baseConfig[key] = userConfig[key]
-    }
-  }
-}
+// Para probar, comenta la fusión y exporta únicamente nextConfig:
+// mergeConfig(nextConfig, userConfig)
 
 export default nextConfig
+
+// Si en el futuro necesitas fusionar configuraciones, considera usar una librería de deep merge
+// en lugar de una función personalizada para evitar problemas con arrays y objetos.
