@@ -26,22 +26,27 @@ const nextConfig = {
 
 mergeConfig(nextConfig, userConfig)
 
-function mergeConfig(nextConfig, userConfig) {
+function mergeConfig(baseConfig, userConfig) {
   if (!userConfig) {
     return
   }
-
   for (const key in userConfig) {
-    if (
-      typeof nextConfig[key] === 'object' &&
-      !Array.isArray(nextConfig[key])
+    if (Array.isArray(baseConfig[key]) && Array.isArray(userConfig[key])) {
+      // Sobrescribe arrays por completo
+      baseConfig[key] = userConfig[key]
+    } else if (
+      typeof baseConfig[key] === 'object' &&
+      baseConfig[key] !== null &&
+      typeof userConfig[key] === 'object' &&
+      userConfig[key] !== null &&
+      !Array.isArray(baseConfig[key])
     ) {
-      nextConfig[key] = {
-        ...nextConfig[key],
+      baseConfig[key] = {
+        ...baseConfig[key],
         ...userConfig[key],
       }
     } else {
-      nextConfig[key] = userConfig[key]
+      baseConfig[key] = userConfig[key]
     }
   }
 }
