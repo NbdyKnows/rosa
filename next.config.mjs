@@ -18,9 +18,9 @@ const nextConfig = {
   },
   experimental: {
     workerThreads: false,
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
+    webpackBuildWorker: false,
+    parallelServerBuildTraces: false,
+    parallelServerCompiles: false,
   },
 }
 
